@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فطن | Fatin - رعاية ذكية لمرضى الصرع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #05050a; /* أسود عميق مائل لليلي */
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* التدرج اللوني المستوحى من شعار فطن */
+        .fatin-gradient {
+            background: linear-gradient(135deg, #22d3ee, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .fatin-bg-gradient {
+            background: linear-gradient(135deg, #06b6d4, #4f46e5);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div class="fixed top-[-15%] left-[-10%] w-[60%] h-[60%] bg-cyan-900/10 rounded-full blur-[130px] -z-10"></div>
+    <div class="fixed bottom-[-15%] right-[-10%] w-[60%] h-[60%] bg-indigo-900/10 rounded-full blur-[130px] -z-10"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-3xl font-black fatin-gradient">فطن</div>
+            <div class="hidden md:flex gap-10 text-sm font-bold text-gray-400">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">المشكلة</a>
+                <a href="#features" class="hover:text-cyan-400 transition-colors">الحل الذكي</a>
+                <a href="#market" class="hover:text-cyan-400 transition-colors">فرص النمو</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">تواصل معنا</a>
+            </div>
+            <button class="fatin-bg-gradient px-8 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-xl shadow-cyan-900/20">
+                انضم إلينا
+            </button>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center justify-center pt-24 px-6 relative">
+        <div class="text-center max-w-5xl">
+            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight">
+                التنبؤ بنوبات الصرع <br>
+                <span class="fatin-gradient">بذكاء استباقي</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 leading-relaxed max-w-3xl mx-auto">
+                نمكّن أكثر من 50 مليون مريض حول العالم من العيش بثقة أكبر من خلال تقنيات تتنبأ بالنوبات قبل حدوثها بـ 30 دقيقة.
+            </p>
+            <div class="flex flex-col md:flex-row gap-5 justify-center">
+                <a href="#features" class="fatin-bg-gradient text-white px-12 py-5 rounded-2xl font-black text-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] transition-all">اكتشف التكنولوجيا</a>
+                <button class="glass px-12 py-5 rounded-2xl font-bold text-lg hover:bg-white/5 transition-all">مشاهدة العرض التجريبي</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-center text-gray-500 font-bold tracking-widest uppercase mb-16 italic text-lg">الفجوة الحرجة في الرعاية الصحية</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="glass p-12 rounded-[3rem] border-cyan-500/10 hover:border-cyan-500/30 transition-all group">
+                    <div class="text-5xl mb-8 group-hover:scale-110 transition-transform">🌍</div>
+                    <h3 class="text-2xl font-black mb-5">تحدي عالمي</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg">أكثر من 50 مليون مريض يواجهون الصرع يومياً دون وسيلة حقيقية للإنذار المبكر.</p>
+                </div>
+                <div class="glass p-12 rounded-[3rem] border-indigo-500/20">
+                    <div class="text-5xl mb-8">⏳</div>
+                    <h3 class="text-2xl font-black mb-5">أجهزة تفاعلية</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg">التقنيات الحالية تكتشف النوبة بعد بدئها فقط، مما يلغي فرصة الاستعداد الوقائي.</p>
+                </div>
+                <div class="glass p-12 rounded-[3rem]">
+                    <div class="text-5xl mb-8">💎</div>
+                    <h3 class="text-2xl font-black mb-5">تكلفة باهظة</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg">المعدات الطبية التقليدية غير عملية وتكلف آلاف الريالات، مما يجعلها بعيدة عن متناول الكثيرين.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-32 px-6 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-20">
+                <div class="flex-1 space-y-12">
+                    <div>
+                        <h2 class="text-5xl font-black mb-6">حل شامل <br><span class="fatin-gradient">لإدارة النوبات</span></h2>
+                        <p class="text-gray-400 text-lg">نجمع بين المؤشرات الحيوية والذكاء الاصطناعي لتغيير نمط الحياة.</p>
+                    </div>
+                    
+                    <div class="space-y-10">
+                        <div class="flex gap-8 items-start">
+                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-black text-xl shadow-inner">01</div>
+                            <div>
+                                <h4 class="text-2xl font-black mb-3">محرك التنبؤ الآلي</h4>
+                                <p class="text-gray-400 text-lg">خوارزميات متطورة تحلل البيانات الحيوية من الساعات الذكية للتنبؤ بالخطر مسبقاً.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 items-start">
+                            <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 font-black text-xl">02</div>
+                            <div>
+                                <h4 class="text-2xl font-black mb-3">تنبيهات فورية وذكية</h4>
+                                <p class="text-gray-400 text-lg">إرسال إشعارات فورية للمريض وللمقربين مع تحديد الموقع الدقيق في حالات الطوارئ.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 items-start">
+                            <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 font-black text-xl">03</div>
+                            <div>
+                                <h4 class="text-2xl font-black mb-3">تحليلات صحية دقيقة</h4>
+                                <p class="text-gray-400 text-lg">تقارير أسبوعية مفصلة تساعد الأطباء في تحسين خطط العلاج وفهم المحفزات.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-1 w-full">
+                    <div class="glass p-10 rounded-[4rem] cyan-glow relative overflow-hidden border-cyan-500/20">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-500/10 blur-[80px]"></div>
+                        <div class="flex justify-between items-center mb-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full fatin-bg-gradient"></div>
+                                <span class="font-black text-lg">لوحة فطن</span>
+                            </div>
+                            <span class="text-xs bg-cyan-500/20 text-cyan-400 px-4 py-1.5 rounded-full font-bold animate-pulse">مباشر الآن</span>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="bg-white/5 p-6 rounded-3xl border border-white/5">
+                                <span class="text-gray-500 text-sm block mb-1">الحالة النفسية</span>
+                                <span class="text-2xl font-bold text-cyan-400">جيد جداً</span>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/5">
+                                <div class="flex justify-between mb-4">
+                                    <span class="text-gray-400 font-bold">نسبة التنبؤ</span>
+                                    <span class="text-cyan-400 font-black">0% خطر</span>
+                                </div>
+                                <div class="w-full bg-black/50 h-3 rounded-full overflow-hidden">
+                                    <div class="bg-cyan-500 h-full w-[0%] transition-all duration-1000"></div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white/5 p-5 rounded-3xl text-center">
+                                    <span class="text-xs text-gray-500 block mb-1">النبض</span>
+                                    <span class="text-xl font-black">72 BPM</span>
+                                </div>
+                                <div class="bg-white/5 p-5 rounded-3xl text-center">
+                                    <span class="text-xs text-gray-500 block mb-1">الأدوية</span>
+                                    <span class="text-xl font-black">0/1 اليوم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="market" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-black mb-16 underline decoration-indigo-500 decoration-4 underline-offset-[15px]">الفرص السوقية والنمو</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-12 rounded-[2.5rem] border-white/5">
+                    <div class="text-gray-500 text-sm font-black mb-4 tracking-widest">TAM</div>
+                    <div class="text-4xl font-black text-cyan-400 mb-3">27 مليار</div>
+                    <p class="text-gray-500 font-bold">إجمالي السوق العالمي المتاح</p>
+                </div>
+                <div class="glass p-12 rounded-[2.5rem] border-cyan-500/20 bg-cyan-500/[0.03]">
+                    <div class="text-gray-500 text-sm font-black mb-4 tracking-widest">SAM</div>
+                    <div class="text-4xl font-black text-indigo-400 mb-3">24 مليون</div>
+                    <p class="text-gray-500 font-bold">السوق القابل للخدمة تقنياً</p>
+                </div>
+                <div class="glass p-12 rounded-[2.5rem] border-white/5">
+                    <div class="text-gray-500 text-sm font-black mb-4 tracking-widest">SOM</div>
+                    <div class="text-4xl font-black text-purple-400 mb-3">2.4 مليون</div>
+                    <p class="text-gray-500 font-bold">المستهدف خلال عامين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-black text-center mb-16">التفوق التنافسي</h2>
+            <div class="overflow-hidden rounded-[2.5rem] border border-white/10 glass shadow-2xl shadow-indigo-900/10">
+                <table class="w-full text-right">
+                    <thead class="bg-white/5 border-b border-white/10">
+                        <tr>
+                            <th class="p-8 text-xl">الميزة التشغيلية</th>
+                            <th class="p-8 text-xl fatin-gradient font-black">فطن</th>
+                            <th class="p-8 text-xl text-gray-500">المنافسين</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-8 font-bold">التنبؤ قبل الحدوث</td>
+                            <td class="p-8 text-cyan-400 font-black text-lg">نعم (30 دقيقة)</td>
+                            <td class="p-8 text-red-500/70 font-bold">لا يوجد</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-8 font-bold">دعم اللغة العربية</td>
+                            <td class="p-8 text-cyan-400 font-black text-lg">تجربة محلية كاملة</td>
+                            <td class="p-8 text-gray-600">غير متوفر</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-8 font-bold">نموذج التكلفة</td>
+                            <td class="p-8 text-cyan-400 font-black text-lg">مجاني (باقة أساسية)</td>
+                            <td class="p-8 text-gray-500 italic">اشتراكات مرتفعة</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-24 px-6 border-t border-white/5 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-indigo-900/5 blur-[100px]"></div>
+        <div class="relative z-10">
+            <div class="text-5xl font-black mb-10 fatin-gradient">فطن</div>
+            <h2 class="text-3xl font-black mb-6 italic">"معك في كل لحظة، من أجل غدٍ آمن"</h2>
+            <p class="text-gray-500 mb-12 max-w-2xl mx-auto leading-loose text-lg font-bold">
+                نحن لسنا مجرد تطبيق، نحن رفيق ذكي لتمكين 50 مليون مريض من العيش بحرية وثقة.
+            </p>
+            <div class="flex justify-center gap-8 mb-16">
+                <div class="glass p-6 rounded-3xl shadow-2xl">
+                    <div class="w-32 h-32 bg-white/10 rounded-2xl flex items-center justify-center text-[10px] text-gray-500">
+                        SCAN TO JOIN
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-700 text-xs font-bold tracking-widest">© 2026 مشروع فطن. جميع الحقوق محفوظة لخدمة الإنسانية.</p>
+        </div>
+    </footer>
+
+    <script>
+        // أنيميشن الظهور عند التمرير
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-12');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, table, .glass').forEach(el => {
+            el.classList.add('transition-all', 'duration-[1200ms]', 'opacity-0', 'translate-y-12', 'ease-out');
+            observer.observe(el);
+        });
+
+        // 1. تتبع الماوس للمؤشر المخصص
+        const cursor = document.getElementById('cursor');
+        const cursorBlur = document.getElementById('cursor-blur');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+            cursorBlur.style.transform = `translate(${e.clientX - 100}px, ${e.clientY - 100}px)`;
+        });
+
+        // 2. تأثير Parallax للخلفية
+        document.addEventListener('mousemove', (e) => {
+            const layers = document.querySelectorAll('.parallax-layer');
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            layers.forEach(layer => {
+                const speed = layer.getAttribute('data-speed');
+                layer.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+            });
+        });
+
+        // 3. تأثير العداد الرقمي (Counter Animation)
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // 4. تأثير Tilt للبطاقات (حركة 3D خفيفة عند الحوم بالماوس)
+        document.querySelectorAll('.card-tilt').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // 5. الأزرار المغناطيسية
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+                cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px) scale(2.5)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0px, 0px)`;
+                cursor.style.transform = `translate(${event.clientX - 10}px, ${event.clientY - 10}px) scale(1)`;
+            });
+        });
+
+        // تشغيل الأنيميشن عند الدخول
+        window.onload = () => {
+            document.getElementById('hero-p').classList.remove('opacity-0', 'translate-y-5');
+            startCounters();
+        };
+        
+    </script>
+</body>
+</html>
