@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن فطن | ثورة في الرعاية التنبؤية</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --bg-deep: #05050b;
+            --primary-glow: #4a90e2;
+            --purple-glow: #a78bfa;
+            --text-silver: #e2e8f0;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a {
+            color: var(--text-silver);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary-glow); }
+
+        .about-hero {
+            padding: 150px 20px 60px;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        /* حاوية الشاشات المطورة لتبدو كجوال حقيقي */
+        .screens-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .screen-item {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            background: var(--glass);
+            border-radius: 50px;
+            padding: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: 0.5s;
+        }
+
+        .screen-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .screen-item:hover {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 50px rgba(74, 144, 226, 0.15);
+        }
+
+        /* حاوية صورة الجوال - تم تكبيرها وتعديل أبعادها */
+        .screen-image-container {
+            flex: 0 0 380px; /* حجم الجوال عرضاً */
+            height: 780px;   /* حجم الجوال طولاً */
+            border-radius: 50px;
+            background: #000;
+            border: 12px solid #1a1a1a; /* حواف الجوال */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(74, 144, 226, 0.2);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* إضافة سماعة الجوال (Notch) للتفاصيل الإضافية */
+        .screen-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 120px;
+            height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .screen-info {
+            flex: 1;
+            text-align: right;
+        }
+
+        .screen-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-glow);
+            font-weight: 800;
+        }
+
+        .screen-info p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            line-height: 1.9;
+        }
+
+        .mission-section {
+            padding: 120px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, rgba(74, 144, 226, 0.05), transparent);
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .footer {
+            padding: 80px 20px 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        /* استجابة الجوال */
+        @media (max-width: 1100px) {
+            .screen-item { flex-direction: column !important; gap: 40px; padding: 40px; text-align: center; }
+            .screen-info { text-align: center; }
+            .screen-image-container { flex: 0 0 auto; width: 320px; height: 650px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="neuralCanvas"></canvas>
+
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'">فطن<span>.</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="#" style="color: var(--primary-glow)">عن فطن</a></li>
+                <li><a href="team.html">فريق فطن</a></li>
+                <li><a href="https://forms.gle/jaa9KfTMbXMfZFgy7">شاركنا تجربتك مع فطن</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <h1 class="animate__animated animate__fadeInDown">رؤية <span class="gradient-text">فطن</span> التقنية</h1>
+            <p style="max-width: 850px; margin: 0 auto; color: #94a3b8; font-size: 1.4rem;" class="animate__animated animate__fadeInUp">
+                نحن هنا لنغير حياة أكثر من 50 مليون مريض بالصرع. من خلال التصميم المدروس والذكاء الاصطناعي الاستباقي، نقدم أماناً لم يكن ممكناً من قبل.
+            </p>
+        </section>
+
+        <section class="screens-grid">
+            <div class="screen-item animate__animated animate__fadeInRight">
+                <div class="screen-image-container">
+                    <img src="/templates/image/15.png" alt="Splash Screen">
+                </div>
+                <div class="screen-info">
+                    <h2>واجهة البداية (Splash Screen)</h2>
+                    <p>
+                        اخترنا ألواناً غامقة وهادئة لأن الألوان الفاتحة تعتبر محفزات لمرضى الصرع. كما أن اللون البنفسجي هو اللون العالمي لمرضى الصرع، فتم اختياره لهذا السبب. تحتوى الواجهة على شعار التطبيق والشعار "معك في كل لحظة من أجل يوم آمن" الذي يعكس رسالتنا في توفير الأمان والمراقبة المستمرة.
+                    </p>
+                </div>
+            </div>
+
+            <div class="screen-item animate__animated animate__fadeInLeft">
+                <div class="screen-image-container">
+                    <img src="/templates/image/13.png" alt="Data Screen">
+                </div>
+                <div class="screen-info">
+                    <h2>محرك البيانات (Data Screen)</h2>
+                    <p>
+                        نستعرض بيانات المستخدم الحالية ونسبة حدوث النوبة خلال الفترة القادمة بناءً على عوامل حيوية مثل HRV و Heart Rate و ECG التي يحللها موديل الذكاء الاصطناعي الخاص بنا. كما يتيح النظام إضافة النوبات يدوياً في حال لم يستطع الموديل التنبؤ بها، مما يساعد على زيادة دقة التعلم الآلي مستقبلاً.
+                    </p>
+                </div>
+            </div>
+
+            <div class="screen-item animate__animated animate__fadeInRight">
+                <div class="screen-image-container">
+                    <img src="/templates/image/14.png" alt="SOS Screen">
+                </div>
+                <div class="screen-info">
+                    <h2>خدمات الطوارئ (SOS Screen)</h2>
+                    <p>
+                        واجهة مخصصة للتواصل السريع مع جهات الطوارئ وقت حدوث النوبة. يتم إرسال رسائل SOS تلقائية عند اكتشاف الخطر، وتحتوي الواجهة على زر طوارئ سريع للاتصال المباشر، بالإضافة إلى قائمة بجهات الاتصال المحفوظة مع إمكانية إدارتها بسهولة لضمان وصول المساعدة في أسرع وقت.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-section">
+            <div class="container">
+                <h2 style="font-size: 3.2rem; margin-bottom: 35px; font-weight: 800;">لماذا فطن؟</h2>
+                <p style="max-width: 950px; margin: 0 auto; font-size: 1.5rem; color: #cbd5e1; line-height: 2.1;">
+                    الأجهزة التقليدية الحالية "تفاعلية"؛ أي أنها تكتشف النوبات بعد بدئها فقط. فطن يتجاوز ذلك بكونه نظاماً "تنبؤياً استباقياً" يستخدم خوارزميات متطورة لإعطاء تحذير مسبق بـ 30 دقيقة، مما يمنح المريض الوقت الكافي للوصول إلى مكان آمن.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h2 class="logo">فطن<span>.</span></h2>
+        <p style="margin: 20px 0; color: #94a3b8; font-size: 1.1rem;">نحو مستقبل آمن لكل مريض بالصرع.</p>
+    </footer>
+
+    <script>
+        // أنيميشن الخلفية العصبية المستقر
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<85; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = '#4a90e2';
+            ctx.strokeStyle = 'rgba(74, 144, 226, 0.12)';
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.fill();
+
+                for(let j=i+1; j<particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if(dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init(); draw();
+    </script>
+</body>
+</html>

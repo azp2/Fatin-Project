@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فريق فطن | العقول خلف الابتكار</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --bg-deep: #05050b;
+            --primary-glow: #4a90e2;
+            --purple-glow: #a78bfa;
+            --text-silver: #e2e8f0;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a {
+            color: var(--text-silver);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary-glow); }
+
+        .team-hero {
+            padding: 150px 20px 60px;
+            text-align: center;
+        }
+
+        .team-hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        /* شبكة أعضاء الفريق */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .member-card {
+            background: var(--glass);
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-glow);
+            box-shadow: 0 20px 40px rgba(74, 144, 226, 0.15);
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .member-card:hover::before { left: 100%; }
+
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--purple-glow));
+            padding: 5px;
+            box-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-deep);
+        }
+
+        .member-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .member-card p {
+            color: var(--primary-glow);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .footer {
+            padding: 80px 20px 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .header { padding: 15px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="neuralCanvas"></canvas>
+
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'">فطن<span>.</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="about.html">عن فطن</a></li>
+                <li><a href="#" style="color: var(--primary-glow)">فريق فطن</a></li>
+                <li><a href="https://forms.gle/jaa9KfTMbXMfZFgy7">شاركنا تجربتك مع فطن</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="team-hero">
+            <h1 class="animate__animated animate__fadeInDown">العقول التي تصنع <span class="gradient-text">الأمان</span></h1>
+            <p style="max-width: 800px; margin: 0 auto; color: #94a3b8; font-size: 1.2rem;" class="animate__animated animate__fadeInUp">
+                نحن فريق من المبتكرين والتقنيين، يجمعنا هدف واحد: تحويل رعاية مرضى الصرع من حالة الانتظار إلى حالة التنبؤ والتمكين.
+            </p>
+        </section>
+
+        <section class="team-grid">
+            <div class="member-card animate__animated animate__zoomIn" style="animation-delay: 0.1s;">
+                <div class="member-image">
+                    <img src="/templates/image/WhatsApp Image‏ 1447-11-04 at 21.03.02.jpeg" alt="عضو الفريق">
+                </div>
+                <h3>هشام النابلسيه</h3>
+                <p>المؤسس والرئيس التنفيذي</p>
+                <div class="member-bio">يقود الرؤية الاستراتيجية لفطن لضمان وصول التطبيق لكل مريض يحتاجه.</div>
+            </div>
+
+            <div class="member-card animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
+                <div class="member-image">
+                    <img src="/templates/image/WhatsApp Image‏ 1447-11-04 at 21.04.21.jpeg" alt="عضو الفريق">
+                </div>
+                <h3>سلمان الصمل</h3>
+                <p>خبير الذكاء الاصطناعي</p>
+                <div class="member-bio">المسؤول عن تطوير محرك التنبؤ العصبي الذي يتوقع النوبات بدقة قبل 30 دقيقة.</div>
+            </div>
+
+            <div class="member-card animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
+                <div class="member-image">
+                    <img src="/templates/image/1758738077804.jpeg" alt="عضو الفريق">
+                </div>
+                <h3>عبدالعزيز عامري</h3>
+                <p>مدير تطوير الواجهات</p>
+                <div class="member-bio">متخصص في بناء الواجهات التفاعلية الحديثة التي تجسد قوة الذكاء الاصطناعي في مشروع فطن.</div>
+            </div>
+
+            <div class="member-card animate__animated animate__zoomIn" style="animation-delay: 0.4s;">
+                <div class="member-image">
+                    <img src="/templates/image/WhatsApp Image‏ 1447-11-04 at 20.36.32-2.jpeg" alt="عضو الفريق">
+                </div>
+                <h3>سعود المالكي</h3>
+                <p>خبير الاستراتيجية والنمو</p>
+                <div class="member-bio">يعمل على توسيع نطاق فطن عالمياً للوصول إلى السوق المستهدف البالغ 27 مليار ريال.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h2 class="logo">فطن<span>.</span></h2>
+        <p style="margin: 20px 0; color: #94a3b8;">تمكين 50 مليون مريض لعيش حياة أكثر ثقة.</p>
+    </footer>
+
+    <script>
+        // أنيميشن الخلفية العصبية (نفس الكود لضمان التناسق)
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = '#4a90e2';
+            ctx.strokeStyle = 'rgba(74, 144, 226, 0.1)';
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.fill();
+
+                for(let j=i+1; j<particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if(dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init(); draw();
+    </script>
+</body>
+</html>

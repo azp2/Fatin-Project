@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فطن | رعاية تنبؤية تتجاوز الحدود</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --bg-deep: #05050b;
+            --primary-glow: #4a90e2;
+            --purple-glow: #a78bfa;
+            --text-silver: #e2e8f0;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* خلفية الشبكة العصبية المتحركة */
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* الناف بار الفاخر الموحد (نفس مقاسات صفحة عن فطن) */
+        .header {
+            position: fixed;
+            top: 0; 
+            width: 100%;
+            padding: 20px 50px; /* المقاس الموحد */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem; /* الحجم الموحد */
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            cursor: pointer;
+        }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-silver);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 1.1rem; /* الحجم الموحد للخط */
+        }
+        .nav-links a:hover { color: var(--primary-glow); text-shadow: 0 0 10px var(--primary-glow); }
+
+        /* قسم الهيرو السينمائي */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 60px; /* زيادة بسيطة في الحشو العلوي للتناسب مع الناف بار الجديد */
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, var(--primary-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        /* كروت الأرقام والمميزات */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            padding: 0 15px;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.5s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.2);
+        }
+
+        .stat-card h3 { font-size: 3rem; color: var(--primary-glow); margin-bottom: 10px; }
+
+        /* شجرة الحياة الرقمية (The Neural Tree) */
+        .tree-section { padding: 100px 20px; text-align: center; }
+        .tree-visual {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            margin: 50px auto;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .neuron {
+            position: absolute;
+            width: 15px; height: 15px;
+            background: var(--primary-glow);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--primary-glow);
+            transition: 0.4s;
+            z-index: 5;
+        }
+
+        .neuron:hover { transform: scale(2); background: var(--purple-glow); box-shadow: 0 0 30px var(--purple-glow); }
+
+        .story-display {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            font-size: 1.4rem;
+            min-height: 120px;
+        }
+
+        /* الفوتر */
+        .footer {
+            padding: 100px 20px 50px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* أزرار فخمة */
+        .btn-premium {
+            background: linear-gradient(45deg, var(--primary-glow), var(--purple-glow));
+            color: white; padding: 20px 50px; border-radius: 100px;
+            text-decoration: none; font-weight: 800; font-size: 1.2rem;
+            box-shadow: 0 10px 40px rgba(74, 144, 226, 0.4);
+            transition: 0.4s; display: inline-block;
+        }
+        .btn-premium:hover { transform: scale(1.05); box-shadow: 0 15px 50px var(--primary-glow); }
+
+        /* ضبط الجوال */
+        @media (max-width: 768px) {
+            .header { padding: 15px 25px; }
+            .nav-links { display: none; }
+            .hero { padding-top: 100px; }
+            .stat-card h3 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="neuralCanvas"></canvas>
+
+    <header class="header">
+        <div class="logo">فطن<span>.</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">الرئيسية</a></li>
+                <li><a href="about.html">عن فطن</a></li>
+                <li><a href="team.html">فريق فطن</a></li>
+                <li><a href="https://forms.gle/jaa9KfTMbXMfZFgy7" style="color: var(--primary-glow)">شاركنا تجربتك مع فطن</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="animate__animated animate__fadeInDown">نتنبأ بالنوبات <br> <span class="gradient-text">قبل وقوعها بـ 30 دقيقة</span></h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">
+                لأكثر من 50 مليون مريض بالصرع حول العالم. فطن هو الحل الذكي الذي يحول الرعاية من تفاعلية إلى تنبؤية استباقية.
+            </p>
+            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="https://testflight.apple.com/join/79nh8HXd" class="btn-premium">استكشف القوة التقنية</a>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>30m</h3>
+                    <p>مدة التنبؤ الاستباقي</p>
+                </div>
+                <div class="stat-card">
+                    <h3>27B</h3>
+                    <p>إجمالي السوق المتاح بالريال (TAM)</p>
+                </div>
+                <div class="stat-card">
+                    <h3>50M</h3>
+                    <p>مريض مستهدف عالمياً</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tree" class="tree-section">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">شجرة التأثير العصبي</h2>
+            <p style="color: #94a3b8; margin-bottom: 50px;">كل نقطة نبض تمثل حياة استعادت أمانها بفضل "فطن".</p>
+            
+            <div class="tree-visual">
+                <div class="neuron" style="top: 20%; left: 30%;" onclick="updateStory('نورة: بفضل فطن، أصبحت أمارس الرياضة بثقة لأنني أعرف حالتي قبل 30 دقيقة.')"></div>
+                <div class="neuron" style="top: 40%; right: 20%;" onclick="updateStory('خالد: نظام التنبيهات الفورية لمقدمي الرعاية أنقذني في لحظة حرجة.')"></div>
+                <div class="neuron" style="top: 60%; left: 25%;" onclick="updateStory('سارة: التقارير الأسبوعية ساعدت طبيبي في فهم محفزات النوبات بدقة.')"></div>
+                <div class="neuron" style="top: 15%; right: 35%;" onclick="updateStory('فهد: خدمة الطوارئ المدمجة هي درعي الحصين في كل مكان.')"></div>
+            </div>
+
+            <div id="storyCard" class="story-display animate__animated">
+                إضغط على إحدى نقاط النبض العصبي لقراءة قصة النجاح
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <h2 class="logo">فطن<span>.</span></h2>
+            <p style="margin: 20px 0;">معك في كل لحظة من أجل يوم آمن.</p>
+            <p style="color: #444;">سوق متاح للخدمة بقيمة 24 مليون ريال (SAM).</p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = '#4a90e2';
+            ctx.strokeStyle = 'rgba(74, 144, 226, 0.1)';
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.fill();
+
+                for(let j=i+1; j<particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if(dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init(); draw();
+
+        function updateStory(text) {
+            const card = document.getElementById('storyCard');
+            card.classList.remove('animate__fadeInUp');
+            void card.offsetWidth; 
+            card.innerHTML = text;
+            card.classList.add('animate__fadeInUp');
+            card.style.borderColor = '#4a90e2';
+        }
+    </script>
+</body>
+</html>
